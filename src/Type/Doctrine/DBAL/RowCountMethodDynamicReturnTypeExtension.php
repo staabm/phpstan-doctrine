@@ -65,9 +65,6 @@ class RowCountMethodDynamicReturnTypeExtension implements DynamicMethodReturnTyp
 		}
 
 		$resultClass = $this->getResultClass($driver);
-		if ($resultClass === null) {
-			return null;
-		}
 
 		if (!$this->reflectionProvider->hasClass($resultClass)) {
 			return null;
@@ -86,9 +83,9 @@ class RowCountMethodDynamicReturnTypeExtension implements DynamicMethodReturnTyp
 
 	/**
 	 * @param DriverDetector::* $driver
-	 * @return class-string<DriverResult>|null
+	 * @return class-string<DriverResult>
 	 */
-	private function getResultClass(string $driver): ?string
+	private function getResultClass(string $driver): string
 	{
 		switch ($driver) {
 			case DriverDetector::IBM_DB2:
@@ -110,8 +107,6 @@ class RowCountMethodDynamicReturnTypeExtension implements DynamicMethodReturnTyp
 			case DriverDetector::SQLSRV:
 				return 'Doctrine\DBAL\Driver\SQLSrv\Result';
 		}
-
-		return null;
 	}
 
 }
