@@ -25,6 +25,12 @@ parameters:
 			path: src/Stubs/Doctrine/StubFilesExtensionLoader.php
 
 		-
+			message: '#^Parameter references internal interface Doctrine\\ORM\\Query\\AST\\Phase2OptimizableConditional in its type\.$#'
+			identifier: parameter.internalInterface
+			count: 2
+			path: src/Type/Doctrine/Query/QueryResultTypeWalker.php
+
+		-
 			message: '#^Accessing PHPStan\\Rules\\Classes\\InstantiationRule\:\:class is not covered by backward compatibility promise\. The class might change in a minor PHPStan version\.$#'
 			identifier: phpstanApi.classConstant
 			count: 1
