@@ -55,9 +55,15 @@ parameters:
 			path: src/Type/Doctrine/Descriptors/ObjectType.php
 
 		-
-			message: '#^Parameter \$condExpr references internal interface Doctrine\\ORM\\Query\\AST\\Phase2OptimizableConditional in its type\.$#'
+			message: '#^Parameter \$condExpr of method PHPStan\\Type\\Doctrine\\Query\\QueryResultTypeWalker\:\:walkConditionalExpression\(\) has typehint with internal interface Doctrine\\ORM\\Query\\AST\\Phase2OptimizableConditional\.$#'
 			identifier: parameter.internalInterface
-			count: 2
+			count: 1
+			path: src/Type/Doctrine/Query/QueryResultTypeWalker.php
+
+		-
+			message: '#^Parameter \$condExpr of method PHPStan\\Type\\Doctrine\\Query\\QueryResultTypeWalker\:\:walkJoinAssociationDeclaration\(\) has typehint with internal interface Doctrine\\ORM\\Query\\AST\\Phase2OptimizableConditional\.$#'
+			identifier: parameter.internalInterface
+			count: 1
 			path: src/Type/Doctrine/Query/QueryResultTypeWalker.php
 
 		-
