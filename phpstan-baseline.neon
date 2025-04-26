@@ -7,8 +7,20 @@ parameters:
 			path: src/Doctrine/Driver/DriverDetector.php
 
 		-
-			message: '#^Access to constant on deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\.$#'
+			message: '''
+				#^Access to constant on deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
 			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/Doctrine/Mapping/ClassMetadataFactory.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
 			count: 1
 			path: src/Doctrine/Mapping/ClassMetadataFactory.php
 
@@ -31,25 +43,37 @@ parameters:
 			path: src/Stubs/Doctrine/StubFilesExtensionLoader.php
 
 		-
-			message: '#^Catching deprecated class Doctrine\\Common\\CommonException\.$#'
+			message: '''
+				#^Catching deprecated class Doctrine\\Common\\CommonException\:
+				The doctrine/common package is deprecated, please use specific packages and their exceptions instead\.$#
+			'''
 			identifier: catch.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/CreateQueryDynamicReturnTypeExtension.php
 
 		-
-			message: '#^Catching deprecated class Doctrine\\ORM\\ORMException\.$#'
+			message: '''
+				#^Catching deprecated class Doctrine\\ORM\\ORMException\:
+				Use Doctrine\\ORM\\Exception\\ORMException for catch and instanceof$#
+			'''
 			identifier: catch.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/CreateQueryDynamicReturnTypeExtension.php
 
 		-
-			message: '#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ArrayType\.$#'
+			message: '''
+				#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ArrayType\:
+				Use \{@link JsonType\} instead\.$#
+			'''
 			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/Descriptors/ArrayType.php
 
 		-
-			message: '#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ObjectType\.$#'
+			message: '''
+				#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ObjectType\:
+				Use \{@link JsonType\} instead\.$#
+			'''
 			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/Descriptors/ObjectType.php
@@ -67,13 +91,19 @@ parameters:
 			path: src/Type/Doctrine/Query/QueryResultTypeWalker.php
 
 		-
-			message: '#^Catching deprecated class Doctrine\\Common\\CommonException\.$#'
+			message: '''
+				#^Catching deprecated class Doctrine\\Common\\CommonException\:
+				The doctrine/common package is deprecated, please use specific packages and their exceptions instead\.$#
+			'''
 			identifier: catch.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/QueryBuilder/QueryBuilderGetQueryDynamicReturnTypeExtension.php
 
 		-
-			message: '#^Catching deprecated class Doctrine\\ORM\\ORMException\.$#'
+			message: '''
+				#^Catching deprecated class Doctrine\\ORM\\ORMException\:
+				Use Doctrine\\ORM\\Exception\\ORMException for catch and instanceof$#
+			'''
 			identifier: catch.deprecatedClass
 			count: 1
 			path: src/Type/Doctrine/QueryBuilder/QueryBuilderGetQueryDynamicReturnTypeExtension.php
@@ -85,9 +115,36 @@ parameters:
 			path: tests/Classes/DoctrineProxyForbiddenClassNamesExtensionTest.php
 
 		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Classes/entity-manager.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/DoctrineIntegration/ORM/entity-manager.php
+
+		-
 			message: '#^Call to internal method PHPUnit\\Framework\\TestCase\:\:dataName\(\) from outside its root namespace PHPUnit\.$#'
 			identifier: method.internal
 			count: 14
+			path: tests/Platform/QueryResultTypeWalkerFetchTypeMatrixTest.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
 			path: tests/Platform/QueryResultTypeWalkerFetchTypeMatrixTest.php
 
 		-
@@ -97,7 +154,19 @@ parameters:
 			path: tests/Rules/DeadCode/UnusedPrivatePropertyRuleTest.php
 
 		-
-			message: '#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ArrayType\.$#'
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Rules/DeadCode/entity-manager.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class Doctrine\\DBAL\\Types\\ArrayType\:
+				Use \{@link JsonType\} instead\.$#
+			'''
 			identifier: classConstant.deprecatedClass
 			count: 1
 			path: tests/Rules/Doctrine/ORM/EntityColumnRuleTest.php
@@ -143,3 +212,30 @@ parameters:
 			identifier: phpstanApi.classConstant
 			count: 1
 			path: tests/Rules/Properties/MissingReadOnlyPropertyAssignRuleTest.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Rules/Properties/entity-manager.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Type/Doctrine/DBAL/mysqli.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Type/Doctrine/DBAL/pdo.php
