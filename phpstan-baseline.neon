@@ -17,6 +17,15 @@ parameters:
 
 		-
 			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/Doctrine/Mapping/ClassMetadataFactory.php
+
+		-
+			message: '''
 				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
 				This class will be removed in 3\.0 without replacement\.$#
 			'''
@@ -116,12 +125,30 @@ parameters:
 
 		-
 			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Classes/entity-manager.php
+
+		-
+			message: '''
 				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
 				This class will be removed in 3\.0 without replacement\.$#
 			'''
 			identifier: new.deprecatedClass
 			count: 1
 			path: tests/Classes/entity-manager.php
+
+		-
+			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/DoctrineIntegration/ORM/entity-manager.php
 
 		-
 			message: '''
@@ -140,6 +167,15 @@ parameters:
 
 		-
 			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Platform/QueryResultTypeWalkerFetchTypeMatrixTest.php
+
+		-
+			message: '''
 				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
 				This class will be removed in 3\.0 without replacement\.$#
 			'''
@@ -148,10 +184,25 @@ parameters:
 			path: tests/Platform/QueryResultTypeWalkerFetchTypeMatrixTest.php
 
 		-
+			message: '#^Call to internal method Doctrine\\DBAL\\Driver\\PDO\\Connection\:\:__construct\(\) from outside its root namespace Doctrine\.$#'
+			identifier: method.internal
+			count: 1
+			path: tests/Platform/UnknownDriver.php
+
+		-
 			message: '#^Accessing PHPStan\\Rules\\DeadCode\\UnusedPrivatePropertyRule\:\:class is not covered by backward compatibility promise\. The class might change in a minor PHPStan version\.$#'
 			identifier: phpstanApi.classConstant
 			count: 1
 			path: tests/Rules/DeadCode/UnusedPrivatePropertyRuleTest.php
+
+		-
+			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Rules/DeadCode/entity-manager.php
 
 		-
 			message: '''
@@ -215,10 +266,10 @@ parameters:
 
 		-
 			message: '''
-				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
 				This class will be removed in 3\.0 without replacement\.$#
 			'''
-			identifier: new.deprecatedClass
+			identifier: method.deprecatedClass
 			count: 1
 			path: tests/Rules/Properties/entity-manager.php
 
@@ -229,7 +280,34 @@ parameters:
 			'''
 			identifier: new.deprecatedClass
 			count: 1
+			path: tests/Rules/Properties/entity-manager.php
+
+		-
+			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
 			path: tests/Type/Doctrine/DBAL/mysqli.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: new.deprecatedClass
+			count: 1
+			path: tests/Type/Doctrine/DBAL/mysqli.php
+
+		-
+			message: '''
+				#^Call to method __construct\(\) of deprecated class Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver\:
+				This class will be removed in 3\.0 without replacement\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Type/Doctrine/DBAL/pdo.php
 
 		-
 			message: '''
