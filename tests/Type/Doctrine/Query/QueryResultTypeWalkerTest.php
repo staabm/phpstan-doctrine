@@ -35,6 +35,7 @@ use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\UnionType;
 use PHPStan\Type\VerbosityLevel;
 use QueryResult\Entities\Embedded;
 use QueryResult\Entities\JoinedChild;
@@ -44,6 +45,7 @@ use QueryResult\Entities\NestedEmbedded;
 use QueryResult\Entities\One;
 use QueryResult\Entities\OneId;
 use QueryResult\Entities\SingleTableChild;
+use QueryResult\EntitiesDbal42\Dbal4Entity;
 use QueryResult\EntitiesEnum\EntityWithEnum;
 use QueryResult\EntitiesEnum\IntEnum;
 use QueryResult\EntitiesEnum\StringEnum;
@@ -185,6 +187,15 @@ final class QueryResultTypeWalkerTest extends PHPStanTestCase
 			$entityWithEnum->intEnumOnStringColumn = IntEnum::A;
 			$entityWithEnum->stringEnumListColumn = [StringEnum::A, StringEnum::B];
 			$em->persist($entityWithEnum);
+		}
+
+		if (InstalledVersions::satisfies(new VersionParser(), 'doctrine/dbal', '>=4.2')) {
+			assert(class_exists(Dbal4Entity::class));
+
+			$dbal4Entity = new Dbal4Entity();
+			$dbal4Entity->enum = 'a';
+			$dbal4Entity->smallfloat = 1.1;
+			$em->persist($dbal4Entity);
 		}
 
 		$em->flush();
@@ -1528,6 +1539,29 @@ final class QueryResultTypeWalkerTest extends PHPStanTestCase
 								COALESCE(e.intEnumColumn, e.intEnumColumn),
 								COALESCE(e.intEnumOnStringColumn, e.intEnumOnStringColumn)
 					FROM		QueryResult\EntitiesEnum\EntityWithEnum e
+				',
+			];
+		}
+
+		if (InstalledVersions::satisfies(new VersionParser(), 'doctrine/dbal', '>=4.2')) {
+			yield 'enum and smallfloat' => [
+				$this->constantArray([
+					[
+						new ConstantStringType('enum'),
+						new UnionType([
+							new ConstantStringType('a'),
+							new ConstantStringType('b'),
+							new ConstantStringType('c'),
+						]),
+					],
+					[
+						new ConstantStringType('smallfloat'),
+						new FloatType(),
+					],
+				]),
+				'
+					SELECT		e.enum, e.smallfloat
+					FROM		QueryResult\EntitiesDbal42\Dbal4Entity e
 				',
 			];
 		}
