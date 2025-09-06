@@ -42,7 +42,7 @@ class DoctrineDiagnoseExtension implements DiagnoseExtension
 
 			$output->writeLineFormatted(sprintf(
 				'<info>Detected driver:</info> %s',
-				$driver === null ? 'None' : $driver,
+				$driver ?? 'None',
 			));
 		}
 

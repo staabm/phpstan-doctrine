@@ -236,7 +236,6 @@ final class QueryResultTypeBuilder
 		return new ConstantStringType($alias);
 	}
 
-
 	public function setIndexedBy(Type $type): void
 	{
 		$this->indexedBy = $type;

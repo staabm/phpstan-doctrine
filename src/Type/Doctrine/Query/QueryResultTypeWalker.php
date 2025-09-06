@@ -129,7 +129,6 @@ class QueryResultTypeWalker extends SqlWalker
 
 	private bool $hasGroupByClause;
 
-
 	/**
 	 * @param Query<mixed> $query
 	 */

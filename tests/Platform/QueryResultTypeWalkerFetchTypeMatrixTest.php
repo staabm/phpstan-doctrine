@@ -4940,7 +4940,6 @@ final class QueryResultTypeWalkerFetchTypeMatrixTest extends PHPStanTestCase
 		];
 	}
 
-
 	/**
 	 * @return array<array<string, mixed>>
 	 */

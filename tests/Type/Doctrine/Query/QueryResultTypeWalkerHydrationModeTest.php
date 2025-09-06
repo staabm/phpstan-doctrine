@@ -399,7 +399,6 @@ final class QueryResultTypeWalkerHydrationModeTest extends PHPStanTestCase
 		throw new LogicException(sprintf('Using %s without hydration mode is not supported.', $methodName));
 	}
 
-
 	private static function stringifies(): bool
 	{
 		return PHP_VERSION_ID < 80100;
