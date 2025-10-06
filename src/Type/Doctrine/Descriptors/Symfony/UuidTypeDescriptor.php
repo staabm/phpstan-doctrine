@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace PHPStan\Type\Doctrine\Descriptors\Ramsey;
+namespace PHPStan\Type\Doctrine\Descriptors\Symfony;
 
 use PHPStan\Type\Doctrine\Descriptors\DoctrineTypeDescriptor;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 class UuidTypeDescriptor implements DoctrineTypeDescriptor
 {
@@ -30,14 +30,14 @@ class UuidTypeDescriptor implements DoctrineTypeDescriptor
 
 	public function getWritableToPropertyType(): Type
 	{
-		return new ObjectType(UuidInterface::class);
+		return new ObjectType(Uuid::class);
 	}
 
 	public function getWritableToDatabaseType(): Type
 	{
 		return TypeCombinator::union(
 			new StringType(),
-			new ObjectType(UuidInterface::class),
+			new ObjectType(Uuid::class),
 		);
 	}
 
