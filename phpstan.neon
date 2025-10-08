@@ -18,11 +18,14 @@ parameters:
 		- src
 		- tests
 
+	resultCachePath: tmp/resultCache.php
+
 	excludePaths:
 		- tests/*/data/*
 		- tests/*/data-attributes/*
 		- tests/*/data-php-*/*
 		- tests/Rules/Doctrine/ORM/entity-manager.php
+		- tests/Infection/
 
 	reportUnmatchedIgnoredErrors: false
 
