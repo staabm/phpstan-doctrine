@@ -8,6 +8,10 @@ on:
     branches:
       - "2.0.x"
 
+concurrency:
+  group: build-${{ github.head_ref || github.run_id }} # will be canceled on subsequent pushes in pull requests but not branches
+  cancel-in-progress: true
+
 jobs:
   lint:
     name: "Lint"
@@ -169,7 +173,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           ini-file: development
           extensions: pdo, mysqli, pgsql, pdo_mysql, pdo_pgsql, pdo_sqlite, mongodb
-          tools: infection:0.31.6
+          tools: infection:0.31.7
 
       - name: "Allow installing on PHP 8.4"
         if: matrix.php-version == '8.4'
@@ -178,10 +182,30 @@ jobs:
       - name: "Install dependencies"
         run: "composer install --no-interaction --no-progress"
 
-      - uses: "actions/download-artifact@v4"
+      - name: "Checkout build-infection"
+        uses: actions/checkout@v5
         with:
-          name: "result-cache-${{ matrix.php-version }}"
-          path: "tmp/"
+          repository: "phpstan/build-infection"
+          path: "build-infection"
+          ref: "1.x"
+
+      - name: "Install build-infection dependencies"
+        working-directory: "build-infection"
+        run: "composer install --no-interaction --no-progress"
+
+      - name: "Configure infection"
+        run: |
+          php build-infection/bin/infection-config.php \
+          > infection.json5
+          cat infection.json5 | jq
+
+      - name: "Cache Result cache"
+        uses: actions/cache@v4
+        with:
+          path: ./tmp
+          key: "result-cache-v1-${{ matrix.php-version }}-${{ github.run_id }}"
+          restore-keys: |
+            result-cache-v1-${{ matrix.php-version }}-
 
       - name: "Run infection"
         run: |
@@ -240,9 +264,3 @@ jobs:
 
       - name: "PHPStan"
         run: "make phpstan"
-
-      - uses: "actions/upload-artifact@v4"
-        with:
-          # "update-packages" is not relevant for the download-artifact counterpart, but we need it here to get unique artifact names across all jobs
-          name: "result-cache-${{ matrix.php-version }}${{ matrix.update-packages && '-packages-updated' || '' }}"
-          path: "tmp/resultCache.php"
