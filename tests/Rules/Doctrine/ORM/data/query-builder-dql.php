@@ -330,3 +330,30 @@ class CustomExpr extends \Doctrine\ORM\Query\Expr
 	}
 
 }
+
+class CreateBaseQuery
+{
+
+	/** @var EntityManager */
+	private $entityManager;
+
+	public function __construct(EntityManager $entityManager)
+	{
+		$this->entityManager = $entityManager;
+	}
+
+	public function findPendingPackingNotesToResolve(): array
+	{
+		return $this->createBaseQuery()
+			->select('mye')
+			->getQuery()
+			->getResult();
+	}
+
+	private function createBaseQuery(): \Doctrine\ORM\QueryBuilder
+	{
+		return $this->entityManager->createQueryBuilder()
+			->from(MyEntity::class, 'mye');
+	}
+
+}
